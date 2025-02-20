@@ -1,0 +1,10 @@
+[cursor.style]
+shape = "Underline"
+
+[font]
+size = 10.0
+
+[font.normal]
+family = "Roboto Mono"
+style = "Regular"
+
