@@ -1,24 +1,26 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 3;        
-static const unsigned int gappx     = 10;        
+static const unsigned int borderpx  = 0;        
+static const unsigned int gappx     = 47;        
 static const unsigned int snap      = 32;
 static const unsigned int systraypinning = 0;  /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 1;    /* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 3;   /* systray spacing */
+static const unsigned int systrayspacing = 0;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */      
-static const int showbar            = 1;        
+static const int showbar            = 1;   
+static const char buttonbar[]       = " 📤 ";      
 static const int topbar             = 0;       
 static const int user_bh            = 32;     
 static const char *fonts[]          = { "SF Pro Display Semibold:size=12" };
-static const char dmenufont[]       = "Roboto:size=12";
+static const char dmenufont[]       = "SF Pro Display Semibold:size=12";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
+
 
 /* #include "/home/ryan/.cache/wal/colors-wal-dwm.h" */
 
@@ -72,7 +74,9 @@ static char dmenumon[2] = "0";
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *flamcmd[]  = { "flameshot","gui", NULL};
-
+static const char *roficmd[]  = { "rofi", "-show", "drun",NULL };
+static const char *incvol[] = {"/usr/bin/amixer", "set", "Master", "5+", NULL};
+static const char *decvol[] = {"/usr/bin/amixer", "set", "Master", "5-", NULL};
 static const 	  Key keys[] = {
 
 	/* modifier                     key        function        argument */
@@ -112,7 +116,8 @@ static const 	  Key keys[] = {
 	{ MODKEY|ShiftMask,   XK_equal, setgaps,         {.i = 0 } },
 
 
-
+	{ 0,				XF86XK_AudioLowerVolume,spawn,{.v = decvol} },	
+	{ 0,				XF86XK_AudioRaiseVolume,spawn,{.v = incvol} },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -130,6 +135,7 @@ static const 	  Key keys[] = {
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+	{ ClkButton,		0,		Button1,	spawn,		{.v = roficmd } },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
