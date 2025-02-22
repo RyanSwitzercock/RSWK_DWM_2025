@@ -71,12 +71,12 @@ static const char vol[]         = "[ `amixer sget Master | tail -n 1 | awk '{pri
 
 static const struct arg args[] = {
 	/* function format          argument */
-	{ ram_used, " [ RAM: %s ]  ", NULL},
+	{ ram_used, " | RAM: %s  ", NULL},
 /*	{ ram_total, "[%s", NULL},*/
-	{ cpu_perc, "[ CPU: %s% ] ", NULL},
-	{ run_command,          "  🔊 %s  ",        vol },
+	{ cpu_perc, "| CPU: %s% | ", NULL},
+	{ run_command,          " 🔊 %s | ",        vol },
 /*	{run_command, "[ %s  ]", "pacman -Qu | wc"}, */
 /*	{ datetime, "%s ",  "%a %d %b %Y, %r | "}, */
-	{datetime, "%s ", "%b %d %a %I:%M%p "}
+	{datetime, "%s ", "%b %d %a %I:%M%p | "}
 
 };
